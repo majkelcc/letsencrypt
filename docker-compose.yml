@@ -1,4 +1,4 @@
-version: "3"
+version: "2"
 services:
 
   letsencrypt:
@@ -30,6 +30,7 @@ services:
       - --agree-tos
       - --email=m@majkel.cc
       - --domain
+      - --standalone
 
   renew:
     extends:
@@ -48,6 +49,7 @@ services:
     entrypoint:
       - certbot
       - renew
+      - --standalone
 
 volumes:
   letsencrypt-webroot:
