@@ -1,0 +1,10 @@
+#!/bin/bash -eu
+
+create_volume_if_not_exists() {
+  local name=${1}
+  if ! docker volume ls -q | grep -q "^${name}$"; then
+    docker volume create "${name}"
+  fi
+}
+
+create_volume_if_not_exists well-known-webroot
