@@ -4,7 +4,7 @@ services:
   letsencrypt:
     image: majkel/letsencrypt
     volumes:
-      - ./letsencrypt-etc:/etc/letsencrypt
+      - ./etc-letsencrypt:/etc/letsencrypt
     network_mode: host
 
   create:
