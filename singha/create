@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker-compose run create ${1:?pass domain name}

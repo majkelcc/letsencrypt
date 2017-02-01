@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker-compose run create_standalone ${1:?pass domain name}

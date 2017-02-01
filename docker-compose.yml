@@ -1,0 +1,55 @@
+version: "3"
+services:
+
+  letsencrypt:
+    image: majkel/letsencrypt
+    volumes:
+      - ./letsencrypt-etc:/etc/letsencrypt
+    network_mode: host
+
+  create:
+    extends:
+      service: letsencrypt
+    entrypoint:
+      - certbot
+      - certonly
+      - --agree-tos
+      - --email=m@majkel.cc
+      - --webroot
+      - --webroot-path=/webroot
+      - --domain
+    volumes:
+      - letsencrypt-webroot:/webroot
+
+  create_standalone:
+    extends:
+      service: letsencrypt
+    entrypoint:
+      - certbot
+      - certonly
+      - --agree-tos
+      - --email=m@majkel.cc
+      - --domain
+
+  renew:
+    extends:
+      service: letsencrypt
+    entrypoint:
+      - certbot
+      - renew
+      - --webroot
+      - --webroot-path=/webroot
+    volumes:
+      - letsencrypt-webroot:/webroot
+
+  renew_standalone:
+    extends:
+      service: letsencrypt
+    entrypoint:
+      - certbot
+      - renew
+
+volumes:
+  letsencrypt-webroot:
+    external:
+      name: well-known-webroot
