@@ -29,8 +29,8 @@ services:
       - certonly
       - --agree-tos
       - --email=m@majkel.cc
-      - --domain
       - --standalone
+      - --domain
 
   renew:
     extends:
